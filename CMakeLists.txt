@@ -13,17 +13,22 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 option(BUILD_DOXYGEN "Build Doxygen documentation" ON)
 option(BUILD_TESTS "Build tests" ON)
 
-if (BUILD_TESTS)
-    enable_testing()
-    include(FetchContent)
-    FetchContent_Declare(
-        googletest
-        URL https://github.com/google/googletest/archive/refs/tags/v1.15.2.zip
-    )
-    set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-    FetchContent_MakeAvailable(googletest)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+
+if(BUILD_DOXYGEN)
+    list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
+    include(DoxygenUtilities)
 endif()
 
 add_subdirectory(lib/mylib)
-
 add_subdirectory(src)
+
+if (BUILD_TESTS)
+    set(TEST_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/tests)
+
+    enable_testing()
+    add_subdirectory(external/googletest)
+    add_subdirectory(tests)
+endif()

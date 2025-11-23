@@ -7,5 +7,9 @@ function(add_project_gtest test_file_path test_file_prefix test_lib)
         GTest::gtest_main
         ${test_lib}
   )
+  set_target_properties(${test_name} PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY ${TEST_RUNTIME_OUTPUT_DIRECTORY}
+  )
   add_test(NAME ${test_name} COMMAND ${test_name})
+  set_tests_properties(${test_name} PROPERTIES LABELS "${test_lib}")
 endfunction()
