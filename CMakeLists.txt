@@ -17,6 +17,21 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
+set(CONFIG_JSON "${CMAKE_SOURCE_DIR}/config/config.json")
+set(CONFIG_HEADER "${CMAKE_BINARY_DIR}/config/config.h")
+
+file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/config")
+
+add_custom_command(
+    OUTPUT "${CONFIG_HEADER}"
+    COMMAND ${Python3_EXECUTABLE} ${CMAKE_SOURCE_DIR}/cmake/json_to_header.py
+            "${CONFIG_JSON}" "${CONFIG_HEADER}"
+    DEPENDS "${CONFIG_JSON}" "${CMAKE_SOURCE_DIR}/cmake/json_to_header.py"
+    COMMENT "Generating config.h from config.json"
+)
+add_custom_target(generate_config ALL DEPENDS "${CONFIG_HEADER}")
+include_directories("${CMAKE_BINARY_DIR}/config")
+
 if(BUILD_DOXYGEN)
     list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
     include(DoxygenUtilities)
