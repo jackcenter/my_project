@@ -21,7 +21,6 @@ set(CONFIG_JSON "${CMAKE_SOURCE_DIR}/config/config.json")
 set(CONFIG_HEADER "${CMAKE_BINARY_DIR}/config/config.h")
 
 file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/config")
-
 add_custom_command(
     OUTPUT "${CONFIG_HEADER}"
     COMMAND ${Python3_EXECUTABLE} ${CMAKE_SOURCE_DIR}/cmake/json_to_header.py
@@ -41,9 +40,9 @@ add_subdirectory(lib/mylib)
 add_subdirectory(src)
 
 if (BUILD_TESTS)
-    set(TEST_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/tests)
-
     enable_testing()
     add_subdirectory(external/googletest)
     add_subdirectory(tests)
 endif()
+
+add_subdirectory(suites/my_suite)

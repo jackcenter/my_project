@@ -14,7 +14,7 @@ with open(input_file, "r") as f:
 
 with open(output_file, "w") as f:
     f.write("#pragma once\n\n")
-    f.write("namespace HardwareConfig {\n")
+    f.write("namespace Config {\n")
     for key, value in config.items():
         if isinstance(value, str):
             f.write(f'    constexpr auto {key} = "{value}";\n')
