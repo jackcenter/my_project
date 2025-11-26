@@ -1,49 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyProject Documentation</title>
-    <style>
-        body {
-            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-            max-width: 900px;
-            margin: 2em auto;
-            padding: 0 1em;
-            line-height: 1.6;
-        }
-        h1, h2 { color: #2c3e50; }
-        a { color: #3498db; text-decoration: none; }
-        a:hover { text-decoration: underline; }
-        ul { list-style: square inside; }
-        .card {
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 1em;
-            margin-bottom: 1em;
-            box-shadow: 1px 1px 4px rgba(0,0,0,0.05);
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MyProject Documentation</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+<header>
     <h1>MyProject</h1>
     <p>High-performance robotics and embedded controls libraries.</p>
+</header>
+
+<main>
 
     <h2>Documentation Modules</h2>
-    <div class="card">
-        <ul>
-            <li><a href="mylib/html/index.html">Core Library (MyLib)</a></li>
-<li><a href="mysuite/html/index.html">Addon Suite (MySuite)</a></li>
-
-        </ul>
+    <div class="modules">
+        <div class="card"><a href="mylib/html/index.html">Core Library (MyLib)</a></div><div class="card"><a href="mysuite/html/index.html">Addon Suite (MySuite)</a></div>
     </div>
 
     <h2>Project Links</h2>
-    <div class="card">
-        <ul>
-            <li><a href="https://github.com/yourname/yourrepo">GitHub Repository</a></li>
-            <li><a href="../README.md">Project README</a></li>
-        </ul>
+    <div class="modules">
+        <div class="card"><a href="https://github.com/yourname/yourrepo">GitHub Repository</a></div>
+        <div class="card"><a href="../README.md">Project README</a></div>
     </div>
+
+</main>
+
+<footer>
+    &copy;  MyProject. Generated with Doxygen.
+</footer>
+
 </body>
 </html>
