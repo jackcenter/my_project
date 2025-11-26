@@ -31,11 +31,6 @@ add_custom_command(
 add_custom_target(generate_config ALL DEPENDS "${CONFIG_HEADER}")
 include_directories("${CMAKE_BINARY_DIR}/config")
 
-if(BUILD_DOXYGEN)
-    list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
-    include(DoxygenUtilities)
-endif()
-
 add_subdirectory(lib/mylib)
 add_subdirectory(src)
 
@@ -46,3 +41,7 @@ if (BUILD_TESTS)
 endif()
 
 add_subdirectory(suites/my_suite)
+
+if (BUILD_DOXYGEN)
+    add_subdirectory(docs)
+endif()

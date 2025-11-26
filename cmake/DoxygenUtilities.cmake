@@ -13,7 +13,7 @@ function(add_doxygen_target target_name project_name input_dir output_dir)
 
     configure_file(${DOXYFILE_IN} ${DOXYFILE_OUT} @ONLY)
 
-    add_custom_target(${target_name}_doc
+    add_custom_target(${target_name}_doc ALL
         COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYFILE_OUT}
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
         COMMENT "Generating Doxygen docs for ${target_name}"
