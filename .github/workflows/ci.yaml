@@ -1,4 +1,4 @@
-name: Build and Deploy Docs
+name: CI
 
 on:
   push:
@@ -7,6 +7,31 @@ on:
     branches: [ main ]
 
 jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update 
+          sudo apt-get install -y graphviz cmake ninja-build libfmt-dev
+
+      - name: Configure
+        run: cmake -B build -G Ninja -DBUILD_DOXYGEN=OFF -DBUILD_TESTS=ON
+
+      - name: Build
+        run: |
+          cmake --build build
+
+      - name: Run Tests
+        run: |
+          cd build
+          ctest --output-on-failure
   docs:
     runs-on: ubuntu-latest
 
@@ -22,9 +47,9 @@ jobs:
           sudo apt-get install -y doxygen graphviz cmake ninja-build libfmt-dev
 
       - name: Configure
-        run: cmake -B build -G Ninja -DBUILD_DOXYGEN=ON
+        run: cmake -B build -G Ninja -DBUILD_DOXYGEN=ON -DBUILD_TESTS=OFF
 
-      - name: Build docs
+      - name: Build Docs
         run: |
           cmake --build build --target docs
 

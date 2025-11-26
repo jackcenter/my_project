@@ -2,6 +2,8 @@ add_library(mylib src/hello.cpp)
 
 find_package(fmt REQUIRED)
 
+add_dependencies(mylib generate_config)
+
 target_include_directories(mylib 
   PUBLIC 
     include
